@@ -6,8 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Update packages
         run: |
@@ -36,8 +34,8 @@ jobs:
         with:
           MANIFEST_BRANCH: 'android-12.1'
           DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x'
-          DEVICE_TREE_BRANCH: 'pbrp'
-          BUILD_TARGET: 'pbrp'
+          DEVICE_TREE_BRANCH: 'twrp'
+          BUILD_TARGET: 'recovery'
 
       - name: Upload Artifact
         if: success()
