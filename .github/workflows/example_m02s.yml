@@ -14,7 +14,9 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Checkout
-      uses: actions/checkout@v4 sudo apt install -y git bc bison build-essential ccache curl flex 
+      uses: actions/checkout@v4
+    - name: starkasti
+      uses: sudo apt install -y git bc bison build-essential ccache curl flex 
           g++-multilib gcc-multilib git-lfs gnupg gperf imagemagick 
           lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool 
           libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils 
