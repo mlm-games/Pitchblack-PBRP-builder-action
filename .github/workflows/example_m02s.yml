@@ -12,9 +12,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
   - name: Checkout
-      uses: actions/checkout@v4
-   - name: Update packages
-      run: sudo apt update && sudo apt upgrade -y
+    uses: actions/checkout@v4
+ 
   - name: Install dependencies
      
   - name: Clean-up
@@ -23,7 +22,7 @@ jobs:
    - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 25
+        swap-size-gb: 17
 
    - name: Build PitchBlack Recovery
       uses: mlm-games/pitchblack-pbrp-builder-action@main
