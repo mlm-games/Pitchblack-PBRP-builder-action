@@ -11,28 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-    - name: Checkout
+    name: Checkout
       uses: actions/checkout@v4
-    - name: Update packages
+    name: Update packages
       run: sudo apt update && sudo apt upgrade -y
-     - name: Install dependencies
+     name: Install dependencies
         run: |
           sudo apt install -y libncurses6 python3 [other-packages]
-    - name: Clean-up
+     name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
 
-    - name: Swap Space   # Easier
+    name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
       with:
         swap-size-gb: 25
 
-    - name: Build PitchBlack Recovery
+    name: Build PitchBlack Recovery
       uses: mlm-games/pitchblack-pbrp-builder-action@main
       id: build
       with:
         MANIFEST_BRANCH: 'android-12.1'
         DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x.git'
-        DEVICE_TREE_BRANCH: 'pbrp'
+        DEVICE_TREE_BRANCH: 'twrp'
         BUILD_TARGET: 'recovery'
 
     # - name: Upload to Release        # Github artifact action eats your space even if you delete the artifacts :\
