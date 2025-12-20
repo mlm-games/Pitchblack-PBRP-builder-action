@@ -20,7 +20,7 @@ jobs:
     - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 16
+        swap-size-gb: 25
 
     - name: Build PitchBlack Recovery
       uses: mlm-games/pitchblack-pbrp-builder-action@main
