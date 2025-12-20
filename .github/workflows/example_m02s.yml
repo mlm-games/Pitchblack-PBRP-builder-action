@@ -16,8 +16,7 @@ jobs:
     name: Update packages
       run: sudo apt update && sudo apt upgrade -y
      name: Install dependencies
-        run: |
-          sudo apt install -y libncurses6 python3 [other-packages]
+     
      name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
 
