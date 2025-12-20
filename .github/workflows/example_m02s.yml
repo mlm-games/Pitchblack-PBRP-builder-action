@@ -1,18 +1,18 @@
-name: PitchBlack [PBRP]
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-
+name: CI
+on: [push, pull_request]
 jobs:
   build:
-    name: Build PBRP by ${{ github.actor }}
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      
+      - name: Update packages
+        run: |
+          sudo apt update && sudo apt upgrade -y
+      
+      - name: Install dependencies
+        run: |
+          sudo apt install -y libncurses6 python3 [other-packages]
 
     - name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
