@@ -8,11 +8,7 @@ jobs:
       
       - name: Update packages
         run: |
-          sudo apt update && sudo apt upgrade -y
-      
-      - name: Install dependencies
-        run: |
-          sudo apt install -y libncurses6 python3
+          sudo apt update && sudo apt upgrade -y && sudo apt install python3
 
     - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
