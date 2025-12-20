@@ -1,35 +1,50 @@
 name: CI
 on: [push, pull_request]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-    - name: Update packages
-      run: |
-        sudo apt update && sudo apt upgrade -y
-   - name: Install dependencies
+      - name: Update packages
         run: |
-          sudo apt install -y libncurses6 python3
+          sudo apt update && sudo apt upgrade -y
 
-    - name: Clean-up
-      uses: rokibhasansagar/slimhub_actions@main
+      - name: Install dependencies
+        run: |
+          sudo apt install -y git bc bison build-essential ccache curl flex 
+          g++-multilib gcc-multilib git-lfs gnupg gperf imagemagick 
+          lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool 
+          libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils 
+          lzop pngcrush rsync schedtool squashfs-tools xsltproc zip 
+          zlib1g-dev python3 python3-pip aria2
 
-    - name: Swap Space
-      uses: pierotofy/set-swap-space@master
-      with:
-        swap-size-gb: 16
+      - name: Clean-up
+        uses: rokibhasansagar/slimhub_actions@main
 
-    - name: Install dependencies
-      run: |
-        sudo apt install -y libncurses6 libncursesw6 libncurses-dev python3
+      - name: Swap Space
+        uses: pierotofy/set-swap-space@v1
+        with:
+          swap-size-gb: 16
 
-    - name: Build PitchBlack Recovery
-      uses: mlm-games/pitchblack-pbrp-builder-action@main
-      id: build
-      with:
-        MANIFEST_BRANCH: 'android-12.1'
-        DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x'
-        DEVICE_TREE_BRANCH: 'pbrp'
-        BUILD_TARGET: 'pbrp'
+      - name: Build PitchBlack Recovery
+        uses: mlm-games/pitchblack-pbrp-builder-action@main
+        id: build
+        with:
+          MANIFEST_BRANCH: 'android-12.1'
+          DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x'
+          DEVICE_TREE_BRANCH: 'pbrp'
+          BUILD_TARGET: 'pbrp'
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PBRP-${{ github.run_id }}
+          path: |
+            out/target/product/*/pbrp*.img
+            out/target/product/*/recovery.img
+          retention-days: 7
