@@ -18,7 +18,9 @@ jobs:
 
     - name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
-       sudo apt install -y git bc bison build-essential ccache curl flex 
+       
+    - name: stu
+      uses: sudo apt install -y git bc bison build-essential ccache curl flex 
           g++-multilib gcc-multilib git-lfs gnupg gperf imagemagick 
           lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool 
           libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils 
