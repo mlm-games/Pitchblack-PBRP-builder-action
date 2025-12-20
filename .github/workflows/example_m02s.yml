@@ -7,29 +7,27 @@ on:
 
 jobs:
   build:
-  - name: Build PBRP by ${{ github.actor }}
+    name: Build PBRP by ${{ github.actor }}
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-  - name: Checkout
-    uses: actions/checkout@v4
- 
-  - name: Install dependencies
-     
-  - name: Clean-up
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
 
-   - name: Swap Space   # Easier
+    - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 17
+        swap-size-gb: 16
 
-   - name: Build PitchBlack Recovery
+    - name: Build PitchBlack Recovery
       uses: mlm-games/pitchblack-pbrp-builder-action@main
       id: build
       with:
         MANIFEST_BRANCH: 'android-12.1'
-        DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x.git'
+        DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x'
         DEVICE_TREE_BRANCH: 'pbrp'
         BUILD_TARGET: 'recovery'
 
