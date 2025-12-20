@@ -7,25 +7,25 @@ on:
 
 jobs:
   build:
-    name: Build PBRP by ${{ github.actor }}
+  - name: Build PBRP by ${{ github.actor }}
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-    name: Checkout
+  - name: Checkout
       uses: actions/checkout@v4
-    name: Update packages
+   - name: Update packages
       run: sudo apt update && sudo apt upgrade -y
-     name: Install dependencies
+  - name: Install dependencies
      
-     name: Clean-up
+  - name: Clean-up
       uses: rokibhasansagar/slimhub_actions@main
 
-    name: Swap Space   # Easier
+   - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
       with:
         swap-size-gb: 25
 
-    name: Build PitchBlack Recovery
+   - name: Build PitchBlack Recovery
       uses: mlm-games/pitchblack-pbrp-builder-action@main
       id: build
       with:
