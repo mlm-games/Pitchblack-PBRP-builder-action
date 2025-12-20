@@ -1,14 +1,18 @@
-name: CI
-on: [push, pull_request]
+name: PitchBlack [PBRP]
+on:
+  push:
+    branches: [ main ]
+  pull_request:  # Add this for PR testing
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   build:
+    name: Build PBRP by ${{ github.actor }}
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Update packages
-        run: |
-          sudo apt update && sudo apt upgrade -y && sudo apt install python3
 
     - name: Swap Space   # Easier
       uses: pierotofy/set-swap-space@master
@@ -22,7 +26,7 @@ jobs:
         MANIFEST_BRANCH: 'android-12.1'
         DEVICE_TREE: 'https://github.com/neepnttt8/twrp_device_samsung_m14x'
         DEVICE_TREE_BRANCH: 'pbrp'
-        BUILD_TARGET: 'recovery'
+        BUILD_TARGET: 'pbrp'
 
     # - name: Upload to Release        # Github artifact action eats your space even if you delete the artifacts :\
     #   uses: softprops/action-gh-release@v1
